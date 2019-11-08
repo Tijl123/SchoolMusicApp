@@ -3,6 +3,7 @@ package be.thomasmore.search.musicbrainz;
 import be.thomasmore.search.entity.Album;
 import be.thomasmore.search.entity.Artist;
 import be.thomasmore.search.entity.Track;
+import be.thomasmore.search.musicbrainz.models.APIResponseArtists;
 import be.thomasmore.search.musicbrainz.models.APIResponseRecordings;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,7 +22,6 @@ public class MusicBrainzApi {
     private static final String ApiBase = "http://musicbrainz.org/ws/2/";
 
     public List<Track> searchTrack(String query) {
-
         try {
             APIResponseRecordings x = sendSearchRequest("recording", query, APIResponseRecordings.class);
             return Arrays.stream(x.getRecordings()).map(Track::new).collect(Collectors.toList());
@@ -39,10 +39,13 @@ public class MusicBrainzApi {
     }
 
     public List<Artist> searchArtist(String query) {
-        return Arrays.asList(
-                new Artist(),
-                new Artist()
-        );
+        try {
+            APIResponseArtists x = sendSearchRequest("artist", query, APIResponseArtists.class);
+            return Arrays.stream(x.getArtists()).map(Artist::new).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     /*
