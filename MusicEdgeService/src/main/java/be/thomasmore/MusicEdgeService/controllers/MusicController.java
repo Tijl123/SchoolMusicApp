@@ -1,6 +1,7 @@
 package be.thomasmore.MusicEdgeService.controllers;
 
 import be.thomasmore.MusicEdgeService.models.GenericResponseWrapper;
+import be.thomasmore.MusicEdgeService.models.Lyrics;
 import be.thomasmore.MusicEdgeService.models.Track;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,6 +32,17 @@ public class MusicController {
         List<Track> tracks = objectMapper.convertValue(wrapper.get_embedded().get("tracks"), new TypeReference<List<Track>>() {});
 
         return tracks;
+
+    }
+
+    @GetMapping("/lyrics/{trackId}")
+    public List<Lyrics> getLyricsByTrackId(@PathVariable("trackId") int trackId){
+        GenericResponseWrapper wrapper= restTemplate.getForObject(
+                "http://lyrics-service/lyrics/search/findLyricsByTrackId?trackId=" + trackId, GenericResponseWrapper.class);
+
+        List<Lyrics> lyrics = objectMapper.convertValue(wrapper.get_embedded().get("lyrics"), new TypeReference<List<Lyrics>>() {});
+
+        return lyrics;
 
     }
 }

@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class Track {
     private String title;
-    private int duration;
-    private int albumId;
+    private int length;
+    private Album[] albums;
+    private Artist[] artist;
     private String mp3;
 }
