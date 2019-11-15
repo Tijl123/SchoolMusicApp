@@ -5,6 +5,7 @@ import be.thomasmore.search.entity.Artist;
 import be.thomasmore.search.entity.Track;
 import be.thomasmore.search.musicbrainz.models.APIResponseArtists;
 import be.thomasmore.search.musicbrainz.models.APIResponseRecordings;
+import be.thomasmore.search.musicbrainz.models.ApiResponseReleases;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -32,10 +33,13 @@ public class MusicBrainzApi {
     }
 
     public List<Album> searchAlbum(String query) {
-        return Arrays.asList(
-                new Album(),
-                new Album()
-        );
+        try {
+            ApiResponseReleases x = sendSearchRequest("release", query, ApiResponseReleases.class);
+            return Arrays.stream(x.getReleases()).map(Album::new).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     public List<Artist> searchArtist(String query) {
