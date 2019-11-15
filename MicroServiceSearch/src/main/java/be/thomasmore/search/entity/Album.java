@@ -18,13 +18,13 @@ public class Album {
     private String title;
     private List<Artist> artists;
     private List<Track> tracks;
-    // TODO: tracks
 
     public Album(Release rel) {
         id = rel.getID();
         title = rel.getTitle();
-        artists = Arrays.stream(rel.getArtistCredit()).map(ReleaseArtistCredit::getArtist).map(Artist::new).collect(Collectors.toList());
-
+        if (rel.getArtistCredit() != null) {
+            artists = Arrays.stream(rel.getArtistCredit()).map(ReleaseArtistCredit::getArtist).map(Artist::new).collect(Collectors.toList());
+        }
         if (rel.getMedia() != null && rel.getMedia().length != 0) {
             Media m = rel.getMedia()[0];
             if (m.getTrack() != null) {

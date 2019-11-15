@@ -3,9 +3,7 @@ package be.thomasmore.search.musicbrainz;
 import be.thomasmore.search.entity.Album;
 import be.thomasmore.search.entity.Artist;
 import be.thomasmore.search.entity.Track;
-import be.thomasmore.search.musicbrainz.models.APIResponseArtists;
-import be.thomasmore.search.musicbrainz.models.APIResponseRecordings;
-import be.thomasmore.search.musicbrainz.models.ApiResponseReleases;
+import be.thomasmore.search.musicbrainz.models.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -17,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class MusicBrainzApi {
@@ -52,19 +51,29 @@ public class MusicBrainzApi {
         }
     }
 
-    /*
     public Track getTrack(UUID uuid) {
-        return new Track();
+        return new Track(sendLookupRequest("track", uuid, "", Recording.class));
     }
 
     public Album getAlbum(UUID uuid) {
-        return new Album();
+        return new Album(sendLookupRequest("release", uuid, "recordings", Release.class));
     }
 
     public Artist getArtist(UUID uuid) {
-        return new Artist();
+        return new Artist(sendLookupRequest("artist", uuid, "releases", be.thomasmore.search.musicbrainz.models.Artist.class));
     }
-     */
+
+    private <T> T sendLookupRequest(String type, UUID id, String inc, Class<T> typeClass) {
+        try {
+            String s = sendApiRequest(type + "/" + id + "?inc=" + inc + "&fmt=json");
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.readerFor(typeClass);
+            return mapper.readValue(s, typeClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     private <T> T sendSearchRequest(String type, String query, Class<T> typeClass) {
         try {

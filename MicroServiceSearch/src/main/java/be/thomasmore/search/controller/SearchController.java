@@ -1,11 +1,17 @@
 package be.thomasmore.search.controller;
 
+import be.thomasmore.search.entity.Album;
+import be.thomasmore.search.entity.Artist;
 import be.thomasmore.search.entity.SearchResult;
+import be.thomasmore.search.entity.Track;
 import be.thomasmore.search.musicbrainz.MusicBrainzApi;
 import be.thomasmore.search.repository.SearchRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/")
@@ -43,7 +49,6 @@ public class SearchController {
         return fetched;
     }
 
-    /*
     @RequestMapping("/track/id/{uuid}")
     public Track searchTrackById(@PathVariable("uuid") UUID uuid) {
         return api.getTrack(uuid);
@@ -58,5 +63,4 @@ public class SearchController {
     public Artist searchArtistById(@PathVariable("uuid") UUID uuid) {
         return api.getArtist(uuid);
     }
-     */
 }
