@@ -16,7 +16,9 @@ public class Artist {
     private String country;
     private Area area;
     private Area beginArea;
+    private ReleaseGroup[] releaseGroups;
     private String disambiguation;
+    private Release[] releases;
     // private ArtistLifeSpan lifeSpan;
     private Tag[] tags;
     private Alias[] aliases;
@@ -62,10 +64,20 @@ public class Artist {
     @JsonProperty("begin-area")
     public void setBeginArea(Area value) { this.beginArea = value; }
 
+    @JsonProperty("release-groups")
+    public ReleaseGroup[] getReleaseGroups() { return releaseGroups; }
+    @JsonProperty("release-groups")
+    public void setReleaseGroups(ReleaseGroup[] value) { this.releaseGroups = value; }
+
     @JsonProperty("disambiguation")
     public String getDisambiguation() { return disambiguation; }
     @JsonProperty("disambiguation")
     public void setDisambiguation(String value) { this.disambiguation = value; }
+
+    @JsonProperty("releases")
+    public Release[] getReleases() { return releases; }
+    @JsonProperty("releases")
+    public void setReleases(Release[] value) { this.releases = value; }
 
     @JsonProperty("tags")
     public Tag[] getTags() { return tags; }

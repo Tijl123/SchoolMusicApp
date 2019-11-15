@@ -3,17 +3,19 @@ package be.thomasmore.search.musicbrainz.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Track {
-    private String id;
+    private UUID id;
     private String number;
     private String title;
     private Long length;
 
     @JsonProperty("id")
-    public String getID() { return id; }
+    public UUID getID() { return id; }
     @JsonProperty("id")
-    public void setID(String value) { this.id = value; }
+    public void setID(UUID value) { this.id = value; }
 
     @JsonProperty("number")
     public String getNumber() { return number; }

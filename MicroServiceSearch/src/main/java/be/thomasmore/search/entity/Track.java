@@ -60,4 +60,10 @@ public class Track {
         title = rec.getTitle();
         length = rec.getLength();
     }
+
+    public Track(be.thomasmore.search.musicbrainz.models.Track track) {
+        id = track.getID();
+        title = track.getTitle();
+        length = track.getLength();
+    }
 }
