@@ -2,6 +2,7 @@ package be.thomasmore.search.controller;
 
 import be.thomasmore.search.entity.SearchResult;
 import be.thomasmore.search.musicbrainz.MusicBrainzApi;
+import be.thomasmore.search.repository.SearchRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class SearchController {
     private final MusicBrainzApi api;
 
-    public SearchController(MusicBrainzApi api) {
+    private final SearchRepository repository;
+
+    public SearchController(MusicBrainzApi api, SearchRepository repository) {
         this.api = api;
+        this.repository = repository;
     }
 
     @RequestMapping("/search")
@@ -20,11 +24,23 @@ public class SearchController {
             @RequestParam(value = "album", required = false) String album,
             @RequestParam(value = "artist", required = false) String artist,
             @RequestParam(value = "track", required = false) String track) {
-        return new SearchResult(
+
+        SearchResult cached = repository.findByAlbumAndArtistAndTrack(album, artist, track);
+
+        if (cached != null) {
+            return cached;
+        }
+
+        SearchResult fetched =  new SearchResult(
+                album, artist, track,
                 album == null ? null : api.searchAlbum(album),
                 artist == null ? null : api.searchArtist(artist),
                 track == null ? null : api.searchTrack(track)
         );
+
+        repository.insert(fetched);
+
+        return fetched;
     }
 
     /*
