@@ -1,0 +1,22 @@
+<mat-card class="card">
+    <mat-card-header>
+      <mat-card-title><b>Zoeken</b></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form #zoekForm="ngForm" (ngSubmit)="onSubmit()">
+            <h5>Geef een artiest in om zijn liedjes te bekijken.</h5>
+            <p>
+                <mat-form-field>
+                    <input matInput placeholder="Artiest" [(ngModel)]="artist" type="text" name="artist" required>
+                </mat-form-field>
+            </p>         
+            <button mat-raised-button color="primary" type="submit"
+            [disabled]="!zoekForm.form.valid || submitted">Zoeken</button>    
+        </form>
+        <ul>
+            <li *ngFor="let t of tracks">
+                  
+            </li>
+        </ul>
+    </mat-card-content>
+</mat-card>
