@@ -49,7 +49,7 @@ public class Artist {
     }
 
     public Artist(RecordingArtistCredit credit) {
-        id = credit.getID();
-        name = credit.getName();
+        id = credit.getArtist().getID();
+        name = credit.getArtist().getName();
     }
 }
