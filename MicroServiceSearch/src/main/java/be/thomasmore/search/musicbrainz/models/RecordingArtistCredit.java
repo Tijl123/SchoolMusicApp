@@ -2,12 +2,21 @@ package be.thomasmore.search.musicbrainz.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+
+import java.util.UUID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecordingArtistCredit {
+    private UUID id;
     private String name;
     private Artist artist;
     private String joinphrase;
+
+    @JsonProperty("id")
+    public UUID getID() { return id; }
+    @JsonProperty("id")
+    public void setID(UUID value) { this.id = value; }
 
     @JsonProperty("name")
     public String getName() { return name; }

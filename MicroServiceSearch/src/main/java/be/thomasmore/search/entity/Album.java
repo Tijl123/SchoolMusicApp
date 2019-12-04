@@ -27,8 +27,8 @@ public class Album {
         }
         if (rel.getMedia() != null && rel.getMedia().length != 0) {
             Media m = rel.getMedia()[0];
-            if (m.getTrack() != null) {
-                tracks = Arrays.stream(m.getTrack()).map(Track::new).collect(Collectors.toList());
+            if (m.getTracks() != null) {
+                tracks = Arrays.stream(m.getTracks()).map(Track::new).collect(Collectors.toList());
             }
         }
     }

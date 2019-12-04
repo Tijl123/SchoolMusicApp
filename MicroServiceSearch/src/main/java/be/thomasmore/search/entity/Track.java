@@ -1,6 +1,7 @@
 package be.thomasmore.search.entity;
 
 import be.thomasmore.search.musicbrainz.models.Recording;
+import be.thomasmore.search.musicbrainz.models.RecordingArtistCredit;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -13,7 +14,7 @@ public class Track {
     private String title;
     private long length;
     private Album[] albums;
-    private Artist[] artist;
+    private Artist[] artists;
 
     public UUID getId() {
         return id;
@@ -47,18 +48,26 @@ public class Track {
         this.albums = albums;
     }
 
-    public Artist[] getArtist() {
-        return artist;
+    public Artist[] getArtists() {
+        return artists;
     }
 
-    public void setArtist(Artist[] artist) {
-        this.artist = artist;
+    public void setArtists(Artist[] artists) {
+        this.artists = artists;
     }
 
     public Track(Recording rec) {
         id = rec.getID();
         title = rec.getTitle();
         length = rec.getLength();
+
+        RecordingArtistCredit[] credits = rec.getArtistCredit();
+        if (credits != null) {
+            artists = new Artist[credits.length];
+            for (int i = 0; i < credits.length; i++) {
+                artists[i] = new Artist(credits[i]);
+            }
+        }
     }
 
     public Track(be.thomasmore.search.musicbrainz.models.Track track) {

@@ -1,5 +1,6 @@
 package be.thomasmore.search.entity;
 
+import be.thomasmore.search.musicbrainz.models.RecordingArtistCredit;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -45,5 +46,10 @@ public class Artist {
         if (x.getReleases() != null) {
             albums = Arrays.stream(x.getReleases()).map(Album::new).collect(Collectors.toList());
         }
+    }
+
+    public Artist(RecordingArtistCredit credit) {
+        id = credit.getID();
+        name = credit.getName();
     }
 }
