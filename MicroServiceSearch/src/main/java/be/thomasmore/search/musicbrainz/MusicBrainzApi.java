@@ -52,7 +52,7 @@ public class MusicBrainzApi {
     }
 
     public Track getTrack(UUID uuid) {
-        return new Track(sendLookupRequest("track", uuid, "", Recording.class));
+        return new Track(sendLookupRequest("recording", uuid, "", Recording.class));
     }
 
     public Album getAlbum(UUID uuid) {
