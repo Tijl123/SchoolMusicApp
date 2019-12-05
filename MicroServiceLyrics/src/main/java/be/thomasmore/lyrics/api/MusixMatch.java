@@ -1,6 +1,7 @@
 package be.thomasmore.lyrics.api;
 
 import be.thomasmore.lyrics.entity.Lyrics;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -22,8 +23,9 @@ public class MusixMatch {
 
     private <T> T lyricsRequest(UUID id, Class<T> typeClass) {
         try {
-            String s = sendApiRequest("track.lyrics.get?format=jsonp&callback=callback&track_mbid=" + id);
+            String s = sendApiRequest("track.lyrics.get?format=json&track_mbid=" + id);
             ObjectMapper mapper = new ObjectMapper();
+            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
             mapper.readerFor(typeClass);
             return mapper.readValue(s, typeClass);
         } catch (Exception e) {

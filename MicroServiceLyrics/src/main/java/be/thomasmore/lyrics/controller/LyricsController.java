@@ -24,8 +24,9 @@ public class LyricsController {
         this.repository = repository;
     }
 
-    @RequestMapping("lyrics/search/{trackId}")
+    @RequestMapping("lyrics/trackId/{trackId}")
     public Lyrics search(@PathVariable("trackId") UUID trackId) {
+
         Lyrics cached = repository.findLyricsByTrackId(trackId);
 
         if (cached != null) {

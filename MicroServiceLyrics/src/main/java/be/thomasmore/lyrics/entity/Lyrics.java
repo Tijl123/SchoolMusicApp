@@ -13,9 +13,8 @@ import java.util.*;
 @NoArgsConstructor
 public class Lyrics {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Long id;
 
     @Column(name="lyrics")
     private String lyrics;
@@ -23,13 +22,11 @@ public class Lyrics {
     @Column(name="trackId")
     private UUID trackId;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public String getLyrics() {
         return lyrics;
@@ -48,8 +45,8 @@ public class Lyrics {
     }
 
     public Lyrics(be.thomasmore.lyrics.api.models.Lyrics x, UUID trackId) {
-        id = x.getId();
-        lyrics = x.getLyrics();
+        this.id = x.getLyricsID();
+        this.lyrics = x.getLyricsBody();
         this.trackId = trackId;
     }
 
