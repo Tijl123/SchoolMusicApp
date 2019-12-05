@@ -3,10 +3,7 @@ package be.thomasmore.lyrics.controller;
 import be.thomasmore.lyrics.api.MusixMatch;
 import be.thomasmore.lyrics.entity.Lyrics;
 import be.thomasmore.lyrics.repository.LyricsRepository;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +21,7 @@ public class LyricsController {
         this.repository = repository;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping("lyrics/trackId/{trackId}")
     public Lyrics search(@PathVariable("trackId") UUID trackId) {
 
