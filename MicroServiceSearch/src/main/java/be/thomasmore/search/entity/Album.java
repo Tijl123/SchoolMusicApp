@@ -32,7 +32,7 @@ public class Album {
         if (rel.getMedia() != null && rel.getMedia().length != 0) {
             Media m = rel.getMedia()[0];
             if (m.getTracks() != null) {
-                tracks = Arrays.stream(m.getTracks()).map(Track::new).collect(Collectors.toList());
+                tracks = Arrays.stream(m.getTracks()).map(be.thomasmore.search.musicbrainz.models.Track::getRecording).map(Track::new).collect(Collectors.toList());
             }
         }
     }

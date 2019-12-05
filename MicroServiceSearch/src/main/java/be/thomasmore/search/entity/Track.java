@@ -73,10 +73,4 @@ public class Track {
             }
         }
     }
-
-    public Track(be.thomasmore.search.musicbrainz.models.Track track) {
-        id = track.getID();
-        title = track.getTitle();
-        length = track.getLength();
-    }
 }

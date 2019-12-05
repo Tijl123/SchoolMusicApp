@@ -11,6 +11,7 @@ public class Track {
     private String number;
     private String title;
     private Long length;
+    private Recording recording;
 
     @JsonProperty("id")
     public UUID getID() { return id; }
@@ -31,4 +32,9 @@ public class Track {
     public Long getLength() { return length; }
     @JsonProperty("length")
     public void setLength(Long value) { this.length = value; }
+
+    @JsonProperty("recording")
+    public Recording getRecording() { return recording; }
+    @JsonProperty("recording")
+    public void setRecording(Recording recording) { this.recording = recording; }
 }
