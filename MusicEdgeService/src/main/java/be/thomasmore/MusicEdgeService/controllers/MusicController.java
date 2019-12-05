@@ -50,11 +50,22 @@ public class MusicController {
     @GetMapping("/album/{title}")
     public List<Album> getAlbumByTitle(@PathVariable("title") String title){
         GenericResponseWrapper wrapper= restTemplate.getForObject(
-                "http://lyrics-service/lyrics/search/findLyricsByTrackId?trackId=" + trackId, GenericResponseWrapper.class);
+                "http://album-service/album/search/findAlbumByTitle?title=" + title, GenericResponseWrapper.class);
 
         List<Album> albums = objectMapper.convertValue(wrapper.get_embedded().get("album"), new TypeReference<List<Album>>() {});
 
         return album;
+
+    }
+
+    @GetMapping("/artist/{name}")
+    public List<Artist> getArtistByName(@PathVariable("name") String name){
+        GenericResponseWrapper wrapper= restTemplate.getForObject(
+                "http://artist-service/artist/search/findArtistByName?name=" + name, GenericResponseWrapper.class);
+
+        List<Artist> artists = objectMapper.convertValue(wrapper.get_embedded().get("artist"), new TypeReference<List<Artist>>() {});
+
+        return artist;
 
     }
 
