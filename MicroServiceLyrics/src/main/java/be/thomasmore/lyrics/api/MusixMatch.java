@@ -1,5 +1,7 @@
 package be.thomasmore.lyrics.api;
 
+import be.thomasmore.lyrics.api.models.Message;
+import be.thomasmore.lyrics.api.models.Response;
 import be.thomasmore.lyrics.entity.Lyrics;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +20,8 @@ public class MusixMatch {
     private static final String apiKey= "&apikey=0b105923501aaeef98bf19d23c0b05b6";
 
     public Lyrics searchLyrics(UUID trackId) {
-        return new Lyrics(lyricsRequest(trackId, be.thomasmore.lyrics.api.models.Lyrics.class), trackId);
+        Response response = lyricsRequest(trackId, Response.class);
+        return new Lyrics(response.getMessage().getBody().getLyrics(), trackId);
     };
 
     private <T> T lyricsRequest(UUID id, Class<T> typeClass) {
