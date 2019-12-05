@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/music")
@@ -56,9 +57,9 @@ public class MusicController {
     }
 
     @GetMapping("/lyrics/{trackId}")
-    public Lyrics getLyricsByTrackId(@PathVariable("trackId") int trackId){
+    public Lyrics getLyricsByTrackId(@PathVariable("trackId") UUID trackId){
         Lyrics lyrics = restTemplate.getForObject(
-                "http://lyrics-service/lyrics/trackId=" + trackId, Lyrics.class);
+                "http://lyrics-service/lyrics/trackId/" + trackId, Lyrics.class);
 
         return lyrics;
 

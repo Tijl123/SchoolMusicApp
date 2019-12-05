@@ -1,13 +1,15 @@
 package be.thomasmore.MusicEdgeService.models;
 
+import java.util.UUID;
+
 public class Lyrics {
 
     private int id;
     private String lyrics;
-    private int trackId;
+    private UUID trackId;
 
 
-    public Lyrics(int id, String lyrics, int trackId) {
+    public Lyrics(int id, String lyrics, UUID trackId) {
         this.id = id;
         this.lyrics = lyrics;
         this.trackId = trackId;
@@ -32,11 +34,11 @@ public class Lyrics {
         this.lyrics = lyrics;
     }
 
-    public int getTrackId() {
+    public UUID getTrackId() {
         return trackId;
     }
 
-    public void setTrackId(int trackId) {
+    public void setTrackId(UUID trackId) {
         this.trackId = trackId;
     }
 }
