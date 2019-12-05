@@ -40,6 +40,10 @@ public class Artist {
         this.albums = albums;
     }
 
+    public Artist() {
+
+    }
+
     public Artist(be.thomasmore.search.musicbrainz.models.Artist x) {
         id = x.getID();
         name = x.getName();

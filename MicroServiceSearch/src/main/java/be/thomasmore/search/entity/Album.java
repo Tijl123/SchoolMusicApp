@@ -19,6 +19,10 @@ public class Album {
     private List<Artist> artists;
     private List<Track> tracks;
 
+    public Album() {
+
+    }
+
     public Album(Release rel) {
         id = rel.getID();
         title = rel.getTitle();

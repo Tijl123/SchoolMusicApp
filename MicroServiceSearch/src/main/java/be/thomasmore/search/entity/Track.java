@@ -56,6 +56,10 @@ public class Track {
         this.artists = artists;
     }
 
+    public Track() {
+
+    }
+
     public Track(Recording rec) {
         id = rec.getID();
         title = rec.getTitle();

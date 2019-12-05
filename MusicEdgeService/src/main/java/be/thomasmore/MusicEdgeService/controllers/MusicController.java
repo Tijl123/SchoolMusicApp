@@ -26,20 +26,20 @@ public class MusicController {
 
     @GetMapping("/track/{trackName}")
     public List<Track> getTracksByName(@PathVariable("trackName") String trackName){
-        GenericResponseWrapper wrapper= restTemplate.getForObject(
-                "http://search-service/search?track=" + trackName, GenericResponseWrapper.class);
+        SearchResult wrapper= restTemplate.getForObject(
+                "http://search-service/search?track=" + trackName, SearchResult.class);
 
-        List<Track> tracks = objectMapper.convertValue(wrapper.get_embedded().get("tracks"), new TypeReference<List<Track>>() {});
+        List<Track> tracks = objectMapper.convertValue(wrapper.getTracks(), new TypeReference<List<Track>>() {});
 
         return tracks;
     }
 
     @GetMapping("/album/{title}")
     public List<Album> getAlbumByTitle(@PathVariable("title") String title){
-        GenericResponseWrapper wrapper= restTemplate.getForObject(
-                "http://search-service/search?album=" + title, GenericResponseWrapper.class);
+        SearchResult wrapper= restTemplate.getForObject(
+                "http://search-service/search?album=" + title, SearchResult.class);
 
-        List<Album> albums = objectMapper.convertValue(wrapper.get_embedded().get("album"), new TypeReference<List<Album>>() {});
+        List<Album> albums = objectMapper.convertValue(wrapper.getAlbums(), new TypeReference<List<Album>>() {});
 
         return albums;
 
@@ -47,10 +47,10 @@ public class MusicController {
 
     @GetMapping("/artist/{name}")
     public List<Artist> getArtistByName(@PathVariable("name") String name){
-        GenericResponseWrapper wrapper= restTemplate.getForObject(
-                "http://search-service/search?artist=" + name, GenericResponseWrapper.class);
+        SearchResult wrapper= restTemplate.getForObject(
+                "http://search-service/search?artist=" + name, SearchResult.class);
 
-        List<Artist> artists = objectMapper.convertValue(wrapper.get_embedded().get("artist"), new TypeReference<List<Artist>>() {});
+        List<Artist> artists = objectMapper.convertValue(wrapper.getArtists(), new TypeReference<List<Artist>>() {});
 
         return artists;
 
