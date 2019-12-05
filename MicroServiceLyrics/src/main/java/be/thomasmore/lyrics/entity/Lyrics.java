@@ -16,7 +16,7 @@ public class Lyrics {
     @Column(name="id")
     private Long id;
 
-    @Column(name="lyrics")
+    @Column(name="lyrics", columnDefinition = "TEXT")
     private String lyrics;
 
     @Column(name="trackId")
