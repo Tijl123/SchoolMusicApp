@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,13 @@ public class MusicController {
 
         List<Track> tracks = objectMapper.convertValue(wrapper.get_embedded().get("tracks"), new TypeReference<List<Track>>() {});
 
-        return tracks;
+
+        List<Track> returnList = new ArrayList<>();
+        for (Track track: tracks) {
+            Lyrics lyric = restTemplate.getForObject("http://lyrics-info-service/lyrics/" + track.getTrackByName(), Movie.class);
+            returnList.add(new ListingItem(movie.getTitle(), rating.getScoreNumber()));
+        }
+        return returnList;
 
     }
 
