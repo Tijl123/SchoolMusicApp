@@ -32,14 +32,7 @@ public class MusicController {
 
         List<Track> tracks = objectMapper.convertValue(wrapper.get_embedded().get("tracks"), new TypeReference<List<Track>>() {});
 
-
-        List<Track> returnList = new ArrayList<>();
-        for (Track track: tracks) {
-            Lyrics lyric = restTemplate.getForObject("http://lyrics-info-service/lyrics/" + track.getTrackByName(), Movie.class);
-            returnList.add(new ListingItem(movie.getTitle(), rating.getScoreNumber()));
-        }
-        return returnList;
-
+        return tracks;
     }
 
     @GetMapping("/lyrics/{trackId}")
