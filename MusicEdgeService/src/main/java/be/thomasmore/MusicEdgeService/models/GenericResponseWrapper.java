@@ -8,4 +8,8 @@ public class GenericResponseWrapper {
     public LinkedHashMap get_embedded(){
         return _embedded;
     }
+
+    public void set_embedded(LinkedHashMap _embedded) {
+        this._embedded = _embedded;
+    }
 }
