@@ -1,5 +1,6 @@
 package be.thomasmore.MusicEdgeService.controllers;
 
+import be.thomasmore.MusicEdgeService.models.Album;
 import be.thomasmore.MusicEdgeService.models.GenericResponseWrapper;
 import be.thomasmore.MusicEdgeService.models.Lyrics;
 import be.thomasmore.MusicEdgeService.models.Track;
@@ -45,4 +46,16 @@ public class MusicController {
         return lyrics;
 
     }
+
+    @GetMapping("/album/{title}")
+    public List<Album> getAlbumByTitle(@PathVariable("title") String title){
+        GenericResponseWrapper wrapper= restTemplate.getForObject(
+                "http://lyrics-service/lyrics/search/findLyricsByTrackId?trackId=" + trackId, GenericResponseWrapper.class);
+
+        List<Album> albums = objectMapper.convertValue(wrapper.get_embedded().get("album"), new TypeReference<List<Album>>() {});
+
+        return album;
+
+    }
+
 }
