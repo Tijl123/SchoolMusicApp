@@ -21,10 +21,10 @@ public class Media {
     @JsonProperty("format")
     public void setFormat(String value) { this.format = value; }
 
-    @JsonProperty("track")
-    public Track[] getTrack() { return track; }
-    @JsonProperty("track")
-    public void setTrack(Track[] value) { this.track = value; }
+    @JsonProperty("tracks")
+    public Track[] getTracks() { return track; }
+    @JsonProperty("tracks")
+    public void setTracks(Track[] value) { this.track = value; }
 
     @JsonProperty("track-count")
     public long getTrackCount() { return trackCount; }

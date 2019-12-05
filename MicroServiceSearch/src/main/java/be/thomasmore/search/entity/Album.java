@@ -19,6 +19,10 @@ public class Album {
     private List<Artist> artists;
     private List<Track> tracks;
 
+    public Album() {
+
+    }
+
     public Album(Release rel) {
         id = rel.getID();
         title = rel.getTitle();
@@ -27,8 +31,8 @@ public class Album {
         }
         if (rel.getMedia() != null && rel.getMedia().length != 0) {
             Media m = rel.getMedia()[0];
-            if (m.getTrack() != null) {
-                tracks = Arrays.stream(m.getTrack()).map(Track::new).collect(Collectors.toList());
+            if (m.getTracks() != null) {
+                tracks = Arrays.stream(m.getTracks()).map(be.thomasmore.search.musicbrainz.models.Track::getRecording).map(Track::new).collect(Collectors.toList());
             }
         }
     }

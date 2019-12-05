@@ -1,0 +1,14 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title><b>{{artist.name}}</b></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p><b>Albums: </b></p>
+        <ul>
+            <li *ngFor="let a of artist.albums">
+                {{a.title}}  
+                <button mat-button color="primary" (click)="toonDetailsAlbum(a.id)">Details</button>
+            </li>
+        </ul>
+    </mat-card-content>
+</mat-card>

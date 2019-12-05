@@ -1,0 +1,23 @@
+<mat-card class="card">
+        <mat-card-header>
+          <mat-card-title><b>Artiest zoeken</b></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Zoek een artiest op naam.</p> 
+            <form #zoekForm="ngForm" (ngSubmit)="onSubmit()">
+                <p>
+                    <mat-form-field>
+                        <input matInput placeholder="Artiest" [(ngModel)]="artist" type="text" name="artist">
+                    </mat-form-field>
+                </p>                 
+                <button mat-raised-button color="primary" type="submit"
+                [disabled]="!zoekForm.form.valid || submitted">Zoeken</button>    
+            </form>
+            <ul>
+                <li *ngFor="let a of artists">
+                    {{a.name}}  
+                    <button mat-button color="primary" (click)="toonDetails(a.id)">Details</button>
+                </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>

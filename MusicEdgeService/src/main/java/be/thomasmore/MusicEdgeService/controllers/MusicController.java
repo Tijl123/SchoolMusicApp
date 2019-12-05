@@ -1,19 +1,16 @@
 package be.thomasmore.MusicEdgeService.controllers;
 
-import be.thomasmore.MusicEdgeService.models.GenericResponseWrapper;
-import be.thomasmore.MusicEdgeService.models.Lyrics;
-import be.thomasmore.MusicEdgeService.models.Track;
+import be.thomasmore.MusicEdgeService.models.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/music")
@@ -24,25 +21,73 @@ public class MusicController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/track/{trackName}")
     public List<Track> getTracksByName(@PathVariable("trackName") String trackName){
-        GenericResponseWrapper wrapper= restTemplate.getForObject(
-                "http://track-service/tracks/search/findTrackByName?name=" + trackName, GenericResponseWrapper.class);
+        SearchResult wrapper= restTemplate.getForObject(
+                "http://search-service/search?track=" + trackName, SearchResult.class);
 
-        List<Track> tracks = objectMapper.convertValue(wrapper.get_embedded().get("tracks"), new TypeReference<List<Track>>() {});
+        List<Track> tracks = objectMapper.convertValue(wrapper.getTracks(), new TypeReference<List<Track>>() {});
 
         return tracks;
-
     }
 
-    @GetMapping("/lyrics/{trackId}")
-    public List<Lyrics> getLyricsByTrackId(@PathVariable("trackId") int trackId){
-        GenericResponseWrapper wrapper= restTemplate.getForObject(
-                "http://lyrics-service/lyrics/search/findLyricsByTrackId?trackId=" + trackId, GenericResponseWrapper.class);
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/trackId/{trackId}")
+    public Track getTrackByTrackId(@PathVariable("trackId") UUID trackId){
+        Track track = restTemplate.getForObject(
+                "http://search-service/track/id/" + trackId, Track.class);
 
-        List<Lyrics> lyrics = objectMapper.convertValue(wrapper.get_embedded().get("lyrics"), new TypeReference<List<Lyrics>>() {});
+        return track;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/album/{title}")
+    public List<Album> getAlbumByTitle(@PathVariable("title") String title){
+        SearchResult wrapper= restTemplate.getForObject(
+                "http://search-service/search?album=" + title, SearchResult.class);
+
+        List<Album> albums = objectMapper.convertValue(wrapper.getAlbums(), new TypeReference<List<Album>>() {});
+
+        return albums;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/albumId/{albumId}")
+    public Album getAlbumByAlbumId(@PathVariable("albumId") UUID albumId){
+        Album album = restTemplate.getForObject(
+                "http://search-service/album/id/" + albumId, Album.class);
+
+        return album;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/artist/{name}")
+    public List<Artist> getArtistByName(@PathVariable("name") String name){
+        SearchResult wrapper= restTemplate.getForObject(
+                "http://search-service/search?artist=" + name, SearchResult.class);
+
+        List<Artist> artists = objectMapper.convertValue(wrapper.getArtists(), new TypeReference<List<Artist>>() {});
+
+        return artists;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/artistId/{artistId}")
+    public Artist getArtistByArtistId(@PathVariable("artistId") UUID artistId){
+        Artist artist = restTemplate.getForObject(
+                "http://search-service/artist/id/" + artistId, Artist.class);
+
+        return artist;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/lyrics/{trackId}")
+    public Lyrics getLyricsByTrackId(@PathVariable("trackId") UUID trackId){
+        Lyrics lyrics = restTemplate.getForObject(
+                "http://lyrics-service/lyrics/trackId/" + trackId, Lyrics.class);
 
         return lyrics;
-
     }
+
 }
