@@ -14,31 +14,31 @@ export class MusicService {
   constructor(private http: HttpClient) { }
 
   getTrackWhereTrackID(trackID: string): Observable<Track> {
-    return this.http.get<Track>("http://localhost:8080/track/id" + trackID);
+    return this.http.get<Track>("http://localhost:8050/music/trackId/" + trackID);
   }
 
   getTracksWhereTitle(track: string): Observable<Track[]> {
-    return this.http.get<Track[]>("http://localhost:8080/search?track=" + track);
+    return this.http.get<Track[]>("http://localhost:8050/music/track/" + track);
   }
 
   getAlbumWhereAlbumID(albumID: string): Observable<Album> {
-    return this.http.get<Album>("http://localhost:8080/album/id" + albumID);
+    return this.http.get<Album>("http://localhost:8050/music/albumId/" + albumID);
   }
 
   getAlbumsWhereTitle(album: string): Observable<Album[]> {
-    return this.http.get<Album[]>("http://localhost:8080/search?album=" + album);
+    return this.http.get<Album[]>("http://localhost:8050/music/album/" + album);
   }
 
   getArtistWhereArtistID(artistID: string): Observable<Artist> {
-    return this.http.get<Artist>("http://localhost:8080/artist/id" + artistID);
+    return this.http.get<Artist>("http://localhost:8050/music/artistId/" + artistID);
   }
 
   getArtistsWhereName(artist: string): Observable<Artist[]> {
-    return this.http.get<Artist[]>("http://localhost:8080/search?artist=" + artist);
+    return this.http.get<Artist[]>("http://localhost:8050/music/artist/" + artist);
   }
 
   getLyricsWhereTrackID(trackId: string): Observable<Lyrics> {
-    return this.http.get<Lyrics>("http://localhost:8090/lyrics/trackId/" + trackId);
+    return this.http.get<Lyrics>("http://localhost:8050/music/lyrics/" + trackId);
   }
 
 }

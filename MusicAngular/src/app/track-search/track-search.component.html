@@ -16,7 +16,7 @@
             <ul>
                 <li *ngFor="let t of tracks">
                     {{t.title}}  
-                    <button mat-button color="primary" (click)="toonDetails(t.trackID)">Details</button>
+                    <button mat-button color="primary" (click)="toonDetails(t.id)">Details</button>
                 </li>
             </ul>
         </mat-card-content>

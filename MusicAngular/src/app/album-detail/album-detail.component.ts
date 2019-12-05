@@ -18,9 +18,9 @@ export class AlbumDetailComponent implements OnInit {
     this._musicService.getAlbumWhereAlbumID(localStorage.getItem("albumId")).subscribe(
       result => {
         this.album = result;
+        console.log(this.album);
       },
       (err) => {
-          
       }
     );
   }

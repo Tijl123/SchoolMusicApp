@@ -7,7 +7,7 @@
         <ul>
             <li *ngFor="let a of artist.albums">
                 {{a.title}}  
-                <button mat-button color="primary" (click)="toonDetailsAlbum(a.albumID)">Details</button>
+                <button mat-button color="primary" (click)="toonDetailsAlbum(a.id)">Details</button>
             </li>
         </ul>
     </mat-card-content>

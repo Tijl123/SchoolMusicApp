@@ -13,6 +13,7 @@ import { Artist } from '../models/artist.model';
 export class TrackDetailComponent implements OnInit {
 
   track: Track;
+  albums: string;
   lyrics: string;
 
   constructor(private _musicService: MusicService, private router: Router) { }
@@ -21,18 +22,21 @@ export class TrackDetailComponent implements OnInit {
     this._musicService.getTrackWhereTrackID(localStorage.getItem("trackId")).subscribe(
       result => {
         this.track = result;
+        if (this.track.albums == null) {
+          this.albums = "Geen albums gevonden."
+        }
       },
       (err) => {
-          
+        console.log("error");
       }
     );
 
     this._musicService.getLyricsWhereTrackID(localStorage.getItem("trackId")).subscribe(
       result => {
-        this.lyrics = result.lyrics;
+        this.lyrics = result.lyrics;     
       },
       (err) => {
-          
+          this.lyrics = "Geen lyrics gevonden."
       }
     );
   }

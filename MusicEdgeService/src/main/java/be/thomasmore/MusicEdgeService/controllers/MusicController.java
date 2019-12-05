@@ -36,7 +36,7 @@ public class MusicController {
     @GetMapping("/trackId/{trackId}")
     public Track getTrackByTrackId(@PathVariable("trackId") UUID trackId){
         Track track = restTemplate.getForObject(
-                "http://search-service/track/id/}" + trackId, Track.class);
+                "http://search-service/track/id/" + trackId, Track.class);
 
         return track;
     }
@@ -56,7 +56,7 @@ public class MusicController {
     @GetMapping("/albumId/{albumId}")
     public Album getAlbumByAlbumId(@PathVariable("albumId") UUID albumId){
         Album album = restTemplate.getForObject(
-                "http://search-service/album/id/}" + albumId, Album.class);
+                "http://search-service/album/id/" + albumId, Album.class);
 
         return album;
     }
@@ -76,7 +76,7 @@ public class MusicController {
     @GetMapping("/artistId/{artistId}")
     public Artist getArtistByArtistId(@PathVariable("artistId") UUID artistId){
         Artist artist = restTemplate.getForObject(
-                "http://search-service/artist/id/}" + artistId, Artist.class);
+                "http://search-service/artist/id/" + artistId, Artist.class);
 
         return artist;
     }

@@ -8,17 +8,18 @@
             <ul>
                 <li *ngFor="let al of track.albums">
                     {{al.title}}  
-                    <button mat-button color="primary" (click)="toonDetailsAlbum(al.albumID)">Details</button>
+                    <button mat-button color="primary" (click)="toonDetailsAlbum(al.id)">Details</button>
                 </li>
             </ul>
+            <p>{{albums}}</p>  
             <p><b>Artiesten: </b></p>
             <ul>
                 <li *ngFor="let ar of track.artists">
                     {{ar.name}}  
-                    <button mat-button color="primary" (click)="toonDetailsArtist(ar.albumID)">Details</button>
+                    <button mat-button color="primary" (click)="toonDetailsArtist(ar.id)">Details</button>
                 </li>
             </ul>
             <p><b>Lyrics: </b></p>
-            <p>{{lyrics}}</p>
+            <p>{{lyrics}}</p>            
     </mat-card-content>
 </mat-card>
