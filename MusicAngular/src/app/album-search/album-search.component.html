@@ -1,21 +1,22 @@
 <mat-card class="card">
     <mat-card-header>
-      <mat-card-title><b>Zoeken</b></mat-card-title>
+      <mat-card-title><b>Album zoeken</b></mat-card-title>
     </mat-card-header>
     <mat-card-content>
+        <p>Zoek een album op titel.</p> 
         <form #zoekForm="ngForm" (ngSubmit)="onSubmit()">
-            <h5>Geef een artiest in om zijn liedjes te bekijken.</h5>
             <p>
                 <mat-form-field>
-                    <input matInput placeholder="Artiest" [(ngModel)]="artist" type="text" name="artist" required>
+                    <input matInput placeholder="Album" [(ngModel)]="album" type="text" name="album">
                 </mat-form-field>
-            </p>         
+            </p>                       
             <button mat-raised-button color="primary" type="submit"
             [disabled]="!zoekForm.form.valid || submitted">Zoeken</button>    
         </form>
         <ul>
-            <li *ngFor="let t of tracks">
-                  
+            <li *ngFor="let a of albums">
+                {{a.title}}  
+                <button mat-button color="primary" (click)="toonDetails(a.albumID)">Details</button>
             </li>
         </ul>
     </mat-card-content>

@@ -1,0 +1,23 @@
+<mat-card class="card">
+        <mat-card-header>
+          <mat-card-title><b>Track zoeken</b></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Zoek een track op titel.</p> 
+            <form #zoekForm="ngForm" (ngSubmit)="onSubmit()">     
+                <p>
+                    <mat-form-field>
+                        <input matInput placeholder="Track" [(ngModel)]="track" type="text" name="track">
+                    </mat-form-field>
+                </p>              
+                <button mat-raised-button color="primary" type="submit"
+                [disabled]="!zoekForm.form.valid || submitted">Zoeken</button>    
+            </form>
+            <ul>
+                <li *ngFor="let t of tracks">
+                    {{t.title}}  
+                    <button mat-button color="primary" (click)="toonDetails(t.trackID)">Details</button>
+                </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>

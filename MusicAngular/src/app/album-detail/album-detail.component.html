@@ -1,0 +1,21 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title><b>{{album.name}}</b></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p><b>Tracks: </b></p>
+        <ul>
+            <li *ngFor="let t of album.tracks">
+                {{a.title}}  
+                <button mat-button color="primary" (click)="toonDetailsTrack(t.trackID)">Details</button>
+            </li>
+        </ul>
+        <p><b>Artists: </b></p>
+        <ul>
+            <li *ngFor="let a of album.artists">
+                {{a.name}}  
+                <button mat-button color="primary" (click)="toonDetailsArtist(a.artistID)">Details</button>
+            </li>
+        </ul>
+    </mat-card-content>
+</mat-card>

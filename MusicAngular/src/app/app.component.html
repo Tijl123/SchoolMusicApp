@@ -2,7 +2,9 @@
   <mat-toolbar-row>
       <p>MusicApp</p>
       <button mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</button>
-      <button mat-button routerLink="/search" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Zoeken</button>
-  </mat-toolbar-row>
+      <button mat-button routerLink="/tracksearch" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Track zoeken</button>
+      <button mat-button routerLink="/albumsearch" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Album zoeken</button>
+      <button mat-button routerLink="/artistsearch" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Artiest zoeken</button>
+    </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
