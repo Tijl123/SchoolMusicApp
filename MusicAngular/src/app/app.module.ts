@@ -8,19 +8,34 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { MusicService } from './music.service';
-import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TrackDetailComponent } from './track-detail/track-detail.component';
+import { ArtistSearchComponent } from './artist-search/artist-search.component';
+import { ArtistDetailComponent } from './artist-detail/artist-detail.component';
+import { AlbumSearchComponent } from './album-search/album-search.component';
+import { AlbumDetailComponent } from './album-detail/album-detail.component';
+import { TrackSearchComponent } from './track-search/track-search.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'search', component: SearchComponent },
+  { path: 'tracksearch', component: TrackSearchComponent },
+  { path: 'trackdetail', component: TrackDetailComponent },
+  { path: 'albumsearch', component: AlbumSearchComponent },
+  { path: 'albumdetail', component: AlbumDetailComponent },
+  { path: 'artistsearch', component: ArtistSearchComponent },
+  { path: 'artistdetail', component: ArtistDetailComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SearchComponent
+    TrackDetailComponent,
+    ArtistSearchComponent,
+    ArtistDetailComponent,
+    AlbumSearchComponent,
+    AlbumDetailComponent,
+    TrackSearchComponent
   ],
   imports: [
     BrowserModule,

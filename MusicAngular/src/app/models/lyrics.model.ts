@@ -1,5 +1,5 @@
 import { Track } from './track.model';
 
 export class Lyrics {
-    constructor(public lyricsID: number, public lyrics: string, public trackId: number, public track: Track){}
+    constructor(public lyricsID: number, public lyrics: string, public trackId: string){}
 }
